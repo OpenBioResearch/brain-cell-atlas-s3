@@ -1,6 +1,8 @@
 import boto3
 import streamlit as st
 from collections import Counter
+from botocore import UNSIGNED
+from botocore.client import Config
 
 """
 This script is designed to interact with a publicly accessible AWS S3 bucket. It retrieves a list of files,
@@ -11,8 +13,8 @@ summarizes them by file type, data source, file extension, and unique donor IDs,
 bucket_arn = "arn:aws:s3:::sea-ad-single-cell-profiling"
 bucket_name = bucket_arn.split(":")[-1]
 
-# Initialize S3 client
-s3 = boto3.client("s3")
+# Initialize S3 client with unsigned config for public access
+s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
 # List objects in the bucket
 response = s3.list_objects_v2(Bucket=bucket_name)
