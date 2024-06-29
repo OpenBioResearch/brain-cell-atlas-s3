@@ -9,7 +9,6 @@ This project includes three Python scripts that provide simple summaries for the
 The following libraries are required for this project:
 - `boto3`
 - `streamlit`
-- `pandas`
 
 You can install these libraries using pip:
 
