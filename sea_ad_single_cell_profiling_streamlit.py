@@ -5,8 +5,7 @@ from botocore import UNSIGNED
 from botocore.client import Config
 
 """
-This script is designed to interact with a publicly accessible AWS S3 bucket. It retrieves a list of files,
-summarizes them by file type, data source, file extension, and unique donor IDs, then displays this information in a Streamlit app.
+This script interacts with a publicly accessible AWS S3 bucket, summarizes bucket contents by file type, data source, file extension, and unique donor IDs, then displays this information in a Streamlit app.
 """
 
 # AWS Open Data S3 ARN Details
@@ -16,7 +15,6 @@ bucket_name = bucket_arn.split(":")[-1]
 # Initialize S3 client with unsigned config for public access
 s3 = boto3.client('s3', config=Config(signature_version=UNSIGNED))
 
-# List objects in the bucket
 response = s3.list_objects_v2(Bucket=bucket_name)
 
 # Counters for different aspects
@@ -25,7 +23,6 @@ data_sources = Counter()
 file_types = Counter()
 donor_ids = set()
 
-# Iterate through objects and categorize
 for obj in response["Contents"]:
     key = obj["Key"]
     parts = key.split("/")
@@ -42,16 +39,12 @@ for obj in response["Contents"]:
         donor_id = key.split("_SEAAD_")[0]
         donor_ids.add(donor_id)
 
-
-# Function to format the summary for Streamlit
 def format_summary(summary_dict):
     formatted_text = ""
     for key, value in summary_dict.items():
         formatted_text += f"- {key}: {value}\n"
     return formatted_text
 
-
-# Create the Streamlit app
 def create_streamlit_app(files, summaries):
     st.title("S3 Bucket File List and Summary")
 
@@ -70,13 +63,10 @@ def create_streamlit_app(files, summaries):
     st.header("File List")
     st.write(files)
 
-
-# Main execution
 if __name__ == "__main__":
     response = s3.list_objects_v2(Bucket=bucket_name)
     files = [obj["Key"] for obj in response["Contents"]]
 
-    # Prepare all summaries in a dictionary
     summaries = {
         "file_extensions": file_extensions,
         "data_sources": data_sources,
