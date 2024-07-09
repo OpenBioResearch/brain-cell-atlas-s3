@@ -1,8 +1,12 @@
-# alzheimers-research-s3
+# brain-cell-atlas-s3
 
 ## Project Overview
 
-This project includes three Python scripts that provide simple summaries for the Seattle Alzheimer's Disease Brain Cell Atlas (SEA-AD) dataset, which resides in a publicly accessible S3 bucket within the Registry of Open Data on AWS. The project also includes a visualization through a Streamlit website.
+This project provides Python scripts and a Streamlit web application to enhance exploration of the  SEA-AD dataset publicly hosted on AWS. The SEA-AD project is an initiative to understand the molecular and cellular changes underlying Alzheimer's disease (AD). By leveraging single-cell profiling technologies (snRNAseq and snATAC-seq), researchers gain insights into the gene expression and epigenomic landscapes of both diseased and healthy brains.
+
+Why This Project?
+
+The raw SEA-AD dataset is vast, so this project aims to summarize the data types and distribution of bucket objects, to provide a Streamlit app for easy visualization and a few foundational python scripts to modify retrieved bucket objects.
 
 ## Setup
 
