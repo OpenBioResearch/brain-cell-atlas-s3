@@ -1,3 +1,6 @@
+"""This script provides a dataset overview of the Seatle Brain Cell Atlas S3 bucket, including h5ad (single-cell data) and bw (genomic data visualization) with data sourced from DLPFC (Dorsolateral Prefrontal Cortex) and MTG (Middle Temporal Gyrus) regions, primarily focused on ATACseq (chromatin accessibility) and RNAseq (gene expression) techniques. 
+"""
+
 import boto3
 from collections import Counter
 from botocore import UNSIGNED
@@ -5,10 +8,7 @@ from botocore.client import Config
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError, ClientError
 
 def summarize_s3_bucket_contents(bucket_arn):
-    """
-    Counters for file extensions, data sources, file types, and unique donor IDs.
-    """
-
+    # Counters
     try:
         bucket_name = bucket_arn.split(":")[-1]
 
@@ -21,26 +21,21 @@ def summarize_s3_bucket_contents(bucket_arn):
             print("No contents found in the bucket.")
             return None
 
-        # Counters for different file types and data sources
         file_extensions = Counter()
         data_sources = Counter()  # E.g., DLPFC, MTG
         file_types = Counter()  # E.g., RNAseq, ATACseq
-        donor_ids = set()  # Store unique donor IDs
+        donor_ids = set()  # unique donor IDs
 
-        # Iterate through objects
         for obj in response["Contents"]:
             key = obj["Key"]
             parts = key.split("/")
 
-            # File Extension
             ext = key.split(".")[-1].lower()
             file_extensions[ext] += 1
 
-            # Data Source
             if len(parts) >= 1 and parts[0] in ["DLPFC", "MTG"]:
                 data_sources[parts[0]] += 1
 
-            # File Type
             if len(parts) >= 2 and parts[1] in ["RNAseq", "ATACseq"]:
                 file_types[parts[1]] += 1
 

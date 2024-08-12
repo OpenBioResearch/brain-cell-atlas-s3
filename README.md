@@ -38,13 +38,14 @@ python sea_ad_single_cell_profiling_files.py
 ### Generating Summary:
 
 ```bash
-python seattle_brain_summary.py
+python sea_ad_single_cell_profiling_counters.py
 ```
 
 ### Running the Streamlit App:
 
 ```bash
-streamlit run seattle_brain_streamlit.py
+
+streamlit run sea_ad_single_cell_profiling_streamlit.py
 ```
 
 ## License

@@ -1,14 +1,13 @@
+"""
+This script interacts with a publicly accessible AWS S3 bucket, summarizes bucket contents by file type, data source, file extension, and unique donor IDs, then displays this information in a Streamlit app.
+"""
+
 import boto3
 import streamlit as st
 from collections import Counter
 from botocore import UNSIGNED
 from botocore.client import Config
 
-"""
-This script interacts with a publicly accessible AWS S3 bucket, summarizes bucket contents by file type, data source, file extension, and unique donor IDs, then displays this information in a Streamlit app.
-"""
-
-# AWS Open Data S3 ARN Details
 bucket_arn = "arn:aws:s3:::sea-ad-single-cell-profiling"
 bucket_name = bucket_arn.split(":")[-1]
 
