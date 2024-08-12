@@ -32,7 +32,7 @@ pip install -r requirements.txt
 ### Listing Files:
 
 ```bash
-python seattle_brain_files.py
+python sea_ad_single_cell_profiling_files.py
 ```
 
 ### Generating Summary:

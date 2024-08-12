@@ -1,12 +1,11 @@
 """
-Lists object in the AWS S3 bucket using an unsigned request,
+Lists objects in the AWS S3 bucket using an unsigned request,
 and saves the keys to a CSV file.
 """
-
+import csv
 import boto3
 from botocore import UNSIGNED
 from botocore.client import Config
-import csv
 
 def list_s3_objects(bucket_arn):
     try:
@@ -21,11 +20,11 @@ def list_s3_objects(bucket_arn):
         print(f"Error accessing bucket: {e}")
         return []
 
-bucket_arn = "arn:aws:s3:::sea-ad-single-cell-profiling"
-objects = list_s3_objects(bucket_arn)
+BUCKET_ARN = "arn:aws:s3:::sea-ad-single-cell-profiling"
+objects = list_s3_objects(BUCKET_ARN)
 
 if objects:
-    with open('s3_objects_list.csv', mode='w', newline='') as file:
+    with open('s3_objects_list.csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(["Object Key"])
         for obj in objects:
