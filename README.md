@@ -10,6 +10,13 @@ The raw SEA-AD dataset is vast, so this project aims to summarize the data types
 
 ## Setup
 
+**Clone the repository:**
+
+```bash
+git clone https://github.com/OpenBioResearch/brain-cell-atlas-s3.git
+cd brain-cell-atlas-s3
+```
+
 The following libraries are required for this project:
 - `boto3`
 - `streamlit`
